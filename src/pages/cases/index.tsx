@@ -42,12 +42,18 @@ export default function Cases() {
           </Button>
         </Flex>
       </Heading>
-      <Box pb="30px" mt="80px">
+      <Box pb="30px" mt="80px" maxWidth="1120px" mx="auto">
         <Heading as="h1" fontWeight={500} fontSize="36px">
           Casos cadastrados
         </Heading>
       </Box>
-      <Flex mx="auto" gap="32px" wrap="wrap" justifyContent="space-between">
+      <Flex
+        mx="auto"
+        gap="32px"
+        wrap="wrap"
+        justifyContent="space-between"
+        maxWidth="1120px"
+      >
         <Flex
           flexDirection="column"
           bg="white"
