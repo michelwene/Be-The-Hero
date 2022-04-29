@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   Heading,
   Image,
@@ -8,7 +7,10 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { MdOutlineExitToApp } from "react-icons/md";
+import { Button } from "../components/Button";
+import { Logo } from "../components/Logo";
 
 export default function Home() {
   return (
@@ -23,7 +25,7 @@ export default function Home() {
         gap="150px"
       >
         <Box>
-          <Image src="/Logo.svg" alt="logo" />
+          <Logo />
           <VStack spacing={5} mt="110px" alignItems="flex-start" width="351px">
             <Heading as="h1" size="lg" fontWeight={500} fontSize="36px">
               Faça seu logon
@@ -44,17 +46,16 @@ export default function Home() {
             >
               Entrar
             </Button>
-            <Button
-              leftIcon={<MdOutlineExitToApp color="red" />}
-              variant="link"
-              alignSelf="flex-start"
-              colorScheme="gray.1000"
-              _active={{
-                transform: "scale(0.98)",
-              }}
-            >
-              Não tenho cadastro
-            </Button>
+            <Link href="/createUser" passHref>
+              <Button
+                leftIcon={<MdOutlineExitToApp color="red" />}
+                variant="link"
+                colorScheme="gray.1000"
+                alignSelf="flex-start"
+              >
+                Não tenho cadastro
+              </Button>
+            </Link>
           </VStack>
         </Box>
         <Box>

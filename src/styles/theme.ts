@@ -1,5 +1,4 @@
 import { extendTheme } from "@chakra-ui/react";
-import { SERVFAIL } from "dns";
 
 export const theme = extendTheme({
   colors: {
@@ -15,10 +14,6 @@ export const theme = extendTheme({
     red: {
       "500": "#E02041",
     },
-  },
-  fonts: {
-    heading: "Roboto",
-    body: "Roboto",
   },
   styles: {
     global: {

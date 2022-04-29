@@ -1,17 +1,41 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Input,
-  Text,
-  Textarea,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, Heading, Text, Textarea, VStack } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { BiLeftArrowAlt } from "react-icons/bi";
+import { Button } from "../../components/Button";
+import { Logo } from "../../components/Logo";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Input } from "../../components/Form/input";
 
-export default function createCases() {
+type CreateCaseFormData = {
+  title: string;
+  description: string;
+  value: number;
+};
+
+const createCaseSchema = yup.object({
+  title: yup.string().required("O título é obrigatório"),
+  description: yup.string().required("A descrição é obrigatória"),
+  value: yup.number().required("O valor é obrigatório"),
+});
+
+export default function CreateCases() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(createCaseSchema),
+  });
+
+  const handleCreateCase: SubmitHandler<Partial<CreateCaseFormData>> = async (
+    values
+  ) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    console.log(values);
+  };
+
   return (
     <Flex as="section" minHeight="100vh" align="center" justify="center">
       <Flex
@@ -31,12 +55,7 @@ export default function createCases() {
           maxWidth="332px"
           py="94px"
         >
-          <Image
-            src="/Logo.svg"
-            alt="Logo Be-the-Hero"
-            width="191px"
-            height="80px"
-          />
+          <Logo width="191px" height="80px" />
           <Heading as="h1" mt="64px" mb="32px">
             Cadastrar novo caso
           </Heading>
@@ -45,34 +64,60 @@ export default function createCases() {
             isso.
           </Text>
 
-          <Button
-            alignSelf="flex-start"
-            color="gray.1000"
-            mt="84px"
-            leftIcon={<BiLeftArrowAlt color="red" fontSize="1.5rem" />}
-            variant="link"
-            _active={{
-              transform: "scale(0.98)",
-            }}
-          >
-            Voltar para a home
-          </Button>
+          <NextLink href="/cases" passHref>
+            <Button
+              alignSelf="flex-start"
+              color="gray.1000"
+              mt="84px"
+              leftIcon={<BiLeftArrowAlt color="red" fontSize="1.5rem" />}
+              variant="link"
+            >
+              Voltar para a home
+            </Button>
+          </NextLink>
         </Flex>
-        <VStack as="form" py="94px" flex="1" maxWidth="448px">
+        <VStack
+          as="form"
+          py="94px"
+          flex="1"
+          maxWidth="448px"
+          onSubmit={handleSubmit(handleCreateCase)}
+        >
           <Input
-            type="text"
             placeholder="Título do caso"
             bg="white"
             height="60px"
+            {...register("title")}
+            error={errors.title}
           />
-          <Textarea placeholder="Descrição" height="175px" bg="white" />
+          <Input
+            placeholder="Descrição"
+            height="175px"
+            bg="white"
+            {...register("description")}
+            error={errors.description}
+          />
 
-          <Input placeholder="Valor em reais" bg="white" height="60px" />
+          <Input
+            placeholder="Valor em reais"
+            bg="white"
+            height="60px"
+            {...register("value")}
+            error={errors.value}
+          />
           <Flex width="100%" columnGap="17px">
-            <Button flex="1" height="60px" variant="outline" border="2px">
-              Cancelar
-            </Button>
-            <Button colorScheme="red" flex="2" height="60px">
+            <NextLink href="/cases" passHref>
+              <Button flex="1" height="60px" variant="outline" border="2px">
+                Cancelar
+              </Button>
+            </NextLink>
+            <Button
+              type="submit"
+              colorScheme="red"
+              flex="2"
+              height="60px"
+              isLoading={isSubmitting}
+            >
               Cadastrar
             </Button>
           </Flex>

@@ -1,16 +1,8 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Image,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Logo } from "../../components/Logo";
 
 export default function Cases() {
   return (
@@ -23,23 +15,22 @@ export default function Cases() {
         mt="24px"
       >
         <Flex columnGap="48px" align="center">
-          <Image
-            src="/Logo.svg"
-            alt="Logo Be-the-Hero"
-            width="164px"
-            height="63px"
-          ></Image>
+          <Logo width="164px" height="63px" />
           <Text fontSize="md" fontWeight={400} lineHeight="18px">
             Bem vindo(a), APAD
           </Text>
         </Flex>
         <Flex columnGap="24px">
-          <Button colorScheme="red" px="48px" py="21px">
-            Cadastrar novo caso
-          </Button>
-          <Button bg="initial" borderColor="gray.100" border="1px">
-            <AiOutlinePoweroff color="red" />
-          </Button>
+          <NextLink href="/cases/createCases" passHref>
+            <Button colorScheme="red" px="48px" py="21px">
+              Cadastrar novo caso
+            </Button>
+          </NextLink>
+          <NextLink href="/" passHref>
+            <Button bg="initial" borderColor="gray.100" border="1px">
+              <AiOutlinePoweroff color="red" />
+            </Button>
+          </NextLink>
         </Flex>
       </Heading>
       <Box pb="30px" mt="80px" maxWidth="1120px" mx="auto">
