@@ -8,13 +8,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Input } from "../../components/Form/input";
-import Link from "next/link";
+import NextLink from "next/link";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { Logo } from "../../components/Logo";
 import { Button } from "../../components/Button";
+import { useEffect } from "react";
+import { normalizePhoneNumber } from "../../utils/masks";
 
 type createUserFormData = {
   name: string;
@@ -29,21 +31,25 @@ const CreateUserFormSchema = yup.object({
   email: yup
     .string()
     .email("Insira um e-mail válido")
+    .typeError("Insira um e-mail válido")
     .required("O e-mail é obrigatório"),
   phone: yup
-    .number()
+    .string()
     .required("O whatsapp é obrigatório")
-    .positive("O whatsapp deve ser um número positivo")
-    .integer("O whatsapp deve ser um número inteiro")
     .min(10, "Insira um número válido"),
   city: yup.string().required("A cidade é obrigatória"),
-  uf: yup.string().required("O estado é obrigatório").length(2),
+  uf: yup
+    .string()
+    .required("O estado é obrigatório")
+    .length(2, "Digite o estado com 2 letras"),
 });
 
 export default function CreateUser() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(CreateUserFormSchema),
@@ -55,6 +61,12 @@ export default function CreateUser() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log(values);
   };
+
+  const phoneValue = watch("phone");
+
+  useEffect(() => {
+    setValue("phone", normalizePhoneNumber(phoneValue));
+  }, [phoneValue]);
 
   return (
     <>
@@ -91,7 +103,7 @@ export default function CreateUser() {
                 encontrarem os casos da sua ONG.
               </Text>
             </Box>
-            <Link href="/" passHref>
+            <NextLink href="/" passHref>
               <Button
                 leftIcon={<BiLeftArrowAlt color="red" fontSize="1.5rem" />}
                 variant="link"
@@ -99,7 +111,7 @@ export default function CreateUser() {
               >
                 Voltar para o logon
               </Button>
-            </Link>
+            </NextLink>
           </VStack>
 
           <Box
@@ -155,6 +167,7 @@ export default function CreateUser() {
                   flex="1"
                   colorScheme="red"
                   isLoading={isSubmitting}
+                  loadingText="Cadastrando"
                   size="lg"
                 >
                   Cadastrar
