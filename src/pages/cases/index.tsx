@@ -7,6 +7,7 @@ import { Logo } from "../../components/Logo";
 import { api } from "../../services/api";
 
 type Case = {
+  id: string;
   title: string;
   description: string;
   value: number;
@@ -24,6 +25,11 @@ export default function Cases() {
       }
     });
   }, []);
+
+  const handleDeleteCase = async (id: string) => {
+    await api.delete(`/cases/${id}`);
+    setCases(cases.filter((caseItem) => caseItem.id !== id));
+  };
 
   console.log(cases);
   return (
@@ -88,6 +94,8 @@ export default function Cases() {
                 >
                   CASO:
                   <RiDeleteBin6Line
+                    type="button"
+                    onClick={() => handleDeleteCase(data.id)}
                     fontSize="20px"
                     color="gray"
                     cursor="pointer"
