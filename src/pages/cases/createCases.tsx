@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../../components/Form/input";
+import { api } from "../../services/api";
 
 type CreateCaseFormData = {
   title: string;
@@ -24,6 +25,7 @@ export default function CreateCases() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(createCaseSchema),
@@ -33,7 +35,13 @@ export default function CreateCases() {
     values
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    try {
+      api.post("/cases", values);
+      console.log(values);
+      reset();
+    } catch (err) {
+      console.log("Erro ao cadastrar caso", err);
+    }
   };
 
   return (

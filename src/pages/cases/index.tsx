@@ -1,10 +1,31 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Logo } from "../../components/Logo";
+import { api } from "../../services/api";
+
+type Case = {
+  title: string;
+  description: string;
+  value: number;
+};
 
 export default function Cases() {
+  const [cases, setCases] = useState<Case[]>([]);
+
+  useEffect(() => {
+    api.get("/cases").then((response) => {
+      try {
+        setCases(response.data);
+      } catch (err) {
+        console.log("Erro ao carregar os casos", err);
+      }
+    });
+  }, []);
+
+  console.log(cases);
   return (
     <Box as="section" maxWidth="78vw" mx="auto">
       <Heading
@@ -45,176 +66,69 @@ export default function Cases() {
         justifyContent="space-between"
         maxWidth="1120px"
       >
-        <Flex
-          flexDirection="column"
-          bg="white"
-          maxWidth="543px"
-          padding="32px"
-          borderRadius="8px"
-          rowGap="32px"
-        >
-          <Box>
-            <Heading
-              as="h2"
-              fontSize="xs"
-              fontWeight={700}
-              color="gray.600"
-              display="flex"
-              justifyContent="space-between"
+        {cases.map((data) => (
+          <>
+            <Flex
+              flexDirection="column"
+              bg="white"
+              width="543px"
+              maxWidth="543px"
+              padding="32px"
+              borderRadius="8px"
+              rowGap="32px"
             >
-              CASO:
-              <RiDeleteBin6Line fontSize="20px" color="gray" cursor="pointer" />
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              Cadelinha atropelada
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h3" fontSize="xs" fontWeight={700} color="gray.600">
-              Descrição:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              A cadelinha Jolie foi atropelada por um carro no bairro Santana e
-              teve que passar por uma cirurgia às pressas.
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h4" fontSize="xs" fontWeight={700} color="gray.600">
-              Valor:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              R$ 120,00 reais
-            </Text>
-          </Box>
-        </Flex>
-
-        <Flex
-          flexDirection="column"
-          bg="white"
-          maxWidth="543px"
-          padding="32px"
-          borderRadius="8px"
-          rowGap="32px"
-        >
-          <Box>
-            <Heading
-              as="h2"
-              fontSize="xs"
-              fontWeight={700}
-              color="gray.600"
-              display="flex"
-              justifyContent="space-between"
-            >
-              CASO:
-              <RiDeleteBin6Line fontSize="20px" color="gray" cursor="pointer" />
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              Cadelinha atropelada
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h3" fontSize="xs" fontWeight={700} color="gray.600">
-              Descrição:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              A cadelinha Jolie foi atropelada por um carro no bairro Santana e
-              teve que passar por uma cirurgia às pressas.
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h4" fontSize="xs" fontWeight={700} color="gray.600">
-              Valor:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              R$ 120,00 reais
-            </Text>
-          </Box>
-        </Flex>
-
-        <Flex
-          flexDirection="column"
-          bg="white"
-          maxWidth="543px"
-          padding="32px"
-          borderRadius="8px"
-          rowGap="32px"
-        >
-          <Box>
-            <Heading
-              as="h2"
-              fontSize="xs"
-              fontWeight={700}
-              color="gray.600"
-              display="flex"
-              justifyContent="space-between"
-            >
-              CASO:
-              <RiDeleteBin6Line fontSize="20px" color="gray" cursor="pointer" />
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              Cadelinha atropelada
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h3" fontSize="xs" fontWeight={700} color="gray.600">
-              Descrição:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              A cadelinha Jolie foi atropelada por um carro no bairro Santana e
-              teve que passar por uma cirurgia às pressas.
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h4" fontSize="xs" fontWeight={700} color="gray.600">
-              Valor:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              R$ 120,00 reais
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          flexDirection="column"
-          bg="white"
-          maxWidth="543px"
-          padding="32px"
-          borderRadius="8px"
-          rowGap="32px"
-        >
-          <Box>
-            <Heading
-              as="h2"
-              fontSize="xs"
-              fontWeight={700}
-              color="gray.600"
-              display="flex"
-              justifyContent="space-between"
-            >
-              CASO:
-              <RiDeleteBin6Line fontSize="20px" color="gray" cursor="pointer" />
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              Cadelinha atropelada
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h3" fontSize="xs" fontWeight={700} color="gray.600">
-              Descrição:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              A cadelinha Jolie foi atropelada por um carro no bairro Santana e
-              teve que passar por uma cirurgia às pressas.
-            </Text>
-          </Box>
-          <Box>
-            <Heading as="h4" fontSize="xs" fontWeight={700} color="gray.600">
-              Valor:
-            </Heading>
-            <Text fontSize="md" fontWeight={400} color="gray.500">
-              R$ 120,00 reais
-            </Text>
-          </Box>
-        </Flex>
+              <Box>
+                <Heading
+                  as="h2"
+                  fontSize="xs"
+                  fontWeight={700}
+                  color="gray.600"
+                  display="flex"
+                  justifyContent="space-between"
+                >
+                  CASO:
+                  <RiDeleteBin6Line
+                    fontSize="20px"
+                    color="gray"
+                    cursor="pointer"
+                  />
+                </Heading>
+                <Text fontSize="md" fontWeight={400} color="gray.500">
+                  {data.title}
+                </Text>
+              </Box>
+              <Box>
+                <Heading
+                  as="h3"
+                  fontSize="xs"
+                  fontWeight={700}
+                  color="gray.600"
+                >
+                  Descrição:
+                </Heading>
+                <Text fontSize="md" fontWeight={400} color="gray.500">
+                  {data.description}
+                </Text>
+              </Box>
+              <Box>
+                <Heading
+                  as="h4"
+                  fontSize="xs"
+                  fontWeight={700}
+                  color="gray.600"
+                >
+                  Valor:
+                </Heading>
+                <Text fontSize="md" fontWeight={400} color="gray.500">
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(data.value)}
+                </Text>
+              </Box>
+            </Flex>
+          </>
+        ))}
       </Flex>
     </Box>
   );
