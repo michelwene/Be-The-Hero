@@ -1,9 +1,9 @@
 {
   "cases": [
     {
-      "value": "123",
-      "description": "Teste1",
-      "title": "Teste1",
+      "title": "Cadelinha atropelada",
+      "description": "Cadelinha atropela na avenida teste",
+      "value": "578.98",
       "id": 1
     }
   ],
@@ -18,9 +18,22 @@
       "id": 1
     },
     {
-      "email": "michelwene@hotmail.com",
-      "password": "$2a$10$mEyQ/bynWPcrUlhFo9k41u5UaiK7cuv7ZPeYQBGa5BS5aqop1Mbh6",
-      "id": 2
+      "email": "wene@email.com",
+      "password": "$2a$10$qsL1RQYr1GTg/zIzbzDQaOcwc5z1lj6.rcLQNShx99i2VhWMLR82G",
+      "name": "Teste2",
+      "phone": "(18) 99807-1096",
+      "city": "Brasil",
+      "uf": "SP",
+      "id": 3
+    },
+    {
+      "email": "Unidos@gmail.com",
+      "password": "$2a$10$sI5itKfi4wqcqdt1pdvs3.tpWNqh5.XM7bdJ6ysMqz9agaSlsl28a",
+      "name": "Unidos",
+      "phone": "(18) 25555-5555",
+      "city": "Quata",
+      "uf": "SP",
+      "id": 4
     }
   ]
 }

@@ -1,10 +1,14 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Logo } from "../../components/Logo";
-import { api } from "../../services/api";
+import { api, removeAuthentication } from "../../services/client/api";
+import { IUserData } from "../../types/auth";
+import { handleDestroyCookies } from "../../utils/destroyCookie";
+import { handleRecoverUserDataFromCookies } from "../../utils/recoverUserDataFromCookie";
 
 type Case = {
   id: string;
@@ -15,6 +19,7 @@ type Case = {
 
 export default function Cases() {
   const [cases, setCases] = useState<Case[]>([]);
+  const userData = handleRecoverUserDataFromCookies();
 
   useEffect(() => {
     api.get("/cases").then((response) => {
@@ -31,6 +36,19 @@ export default function Cases() {
     setCases(cases.filter((caseItem) => caseItem.id !== id));
   };
 
+  async function handleSignOut() {
+    try {
+      await handleDestroyCookies("userData");
+      await handleDestroyCookies("accessToken");
+
+      removeAuthentication();
+
+      Router.push("/");
+    } catch (err) {
+      alert("erro");
+    }
+  }
+
   return (
     <Box as="section" maxWidth="78vw" mx="auto">
       <Heading
@@ -43,7 +61,7 @@ export default function Cases() {
         <Flex columnGap="48px" align="center">
           <Logo width="164px" height="63px" />
           <Text fontSize="md" fontWeight={400} lineHeight="18px">
-            Bem vindo(a), APAD
+            Bem vindo(a), {userData?.user.name}
           </Text>
         </Flex>
         <Flex columnGap="24px">
@@ -53,7 +71,12 @@ export default function Cases() {
             </Button>
           </NextLink>
           <NextLink href="/" passHref>
-            <Button bg="initial" borderColor="gray.100" border="1px">
+            <Button
+              bg="initial"
+              borderColor="gray.100"
+              border="1px"
+              onClick={() => handleSignOut()}
+            >
               <AiOutlinePoweroff color="red" />
             </Button>
           </NextLink>

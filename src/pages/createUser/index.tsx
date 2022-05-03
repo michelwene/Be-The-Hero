@@ -17,7 +17,7 @@ import { Logo } from "../../components/Logo";
 import { Button } from "../../components/Button";
 import { useEffect } from "react";
 import { normalizePhoneNumber } from "../../utils/masks";
-import { api } from "../../services/api";
+import { api } from "../../services/client/api";
 
 type createUserFormData = {
   name: string;
@@ -64,6 +64,7 @@ export default function CreateUser() {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(CreateUserFormSchema),
@@ -75,6 +76,7 @@ export default function CreateUser() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
       api.post("/users", values);
+      reset();
     } catch (err) {
       console.log("erro: ", err);
     }

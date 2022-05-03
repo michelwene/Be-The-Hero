@@ -1,0 +1,9 @@
+{
+    "email": {
+        "required": "Email obrigatório*",
+        "email": "Email inválido*"
+    },
+    "password": {
+        "required": "Senha obrigatória*"
+    }
+}

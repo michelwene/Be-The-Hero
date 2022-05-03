@@ -15,12 +15,13 @@ import { Button } from "../components/Button";
 import { Logo } from "../components/Logo";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../components/Form/input";
-import { api } from "../services/api";
+import { api } from "../services/client/api";
 import Router from "next/router";
+import { authService } from "../services/useCases/AuthService";
 
 interface FormUserLogin {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 const CreateUserFormSchema = yup.object({
@@ -45,20 +46,16 @@ export default function Home() {
     resolver: yupResolver(CreateUserFormSchema),
   });
 
-  const handleSubmitForm: SubmitHandler<Partial<FormUserLogin>> = async (
-    data
-  ) => {
+  async function handleSubmitForm(data: FormUserLogin) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
-      const response = await api.post("/login", data);
-      if (response.status === 200) {
-        Router.push("/cases");
-      }
-      console.log(response);
+      await authService.signIn(data);
+
+      Router.push("/cases");
     } catch (err) {
       console.log(err);
     }
-  };
+  }
   return (
     <>
       <Flex
@@ -76,9 +73,13 @@ export default function Home() {
             <Heading as="h1" size="lg" fontWeight={500} fontSize="36px">
               Faça seu logon
             </Heading>
-            <Box as="form" onSubmit={handleSubmit(handleSubmitForm)}>
-              <VStack>
-                <SimpleGrid>
+            <Box
+              as="form"
+              width="100%"
+              onSubmit={handleSubmit(handleSubmitForm)}
+            >
+              <VStack alignItems="flex-start">
+                <SimpleGrid width="100%" spacing={4}>
                   <Input
                     type="email"
                     bg="white"
