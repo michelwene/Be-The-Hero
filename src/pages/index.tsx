@@ -16,6 +16,7 @@ import { Logo } from "../components/Logo";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../components/Form/input";
 import { api } from "../services/api";
+import Router from "next/router";
 
 interface FormUserLogin {
   email: string;
@@ -50,6 +51,9 @@ export default function Home() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
       const response = await api.post("/login", data);
+      if (response.status === 200) {
+        Router.push("/cases");
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
