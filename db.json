@@ -1,3 +1,27 @@
 {
-  "cases": []
+  "cases": [
+    {
+      "value": "123",
+      "description": "Teste1",
+      "title": "Teste1",
+      "id": 1
+    },
+    {
+      "title": "123",
+      "description": "123",
+      "value": "25.00",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "email": "Teste@gmail.com",
+      "password": "$2a$10$JxHJ9GjTcX9kLz5tS.jD/ey9nCzsTlzvTHVKl0Wx2ivTSKlo96DzS",
+      "name": "Teste",
+      "phone": "(18) 99999-9999",
+      "city": "Quatá",
+      "uf": "MG",
+      "id": 1
+    }
+  ]
 }

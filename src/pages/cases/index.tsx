@@ -10,7 +10,7 @@ type Case = {
   id: string;
   title: string;
   description: string;
-  value: number;
+  value: string;
 };
 
 export default function Cases() {
@@ -31,7 +31,6 @@ export default function Cases() {
     setCases(cases.filter((caseItem) => caseItem.id !== id));
   };
 
-  console.log(cases);
   return (
     <Box as="section" maxWidth="78vw" mx="auto">
       <Heading
@@ -131,7 +130,7 @@ export default function Cases() {
                   {new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL",
-                  }).format(data.value)}
+                  }).format(Number(data.value))}
                 </Text>
               </Box>
             </Flex>

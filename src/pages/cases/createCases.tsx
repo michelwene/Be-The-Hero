@@ -8,17 +8,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../../components/Form/input";
 import { api } from "../../services/api";
+import { useEffect, useState } from "react";
+import { currencyMask } from "../../utils/masks";
 
 type CreateCaseFormData = {
   title: string;
   description: string;
-  value: number;
+  value: string;
 };
 
 const createCaseSchema = yup.object({
   title: yup.string().required("O título é obrigatório"),
   description: yup.string().required("A descrição é obrigatória"),
-  value: yup.number().required("O valor é obrigatório"),
+  value: yup.string().required("O valor é obrigatório"),
 });
 
 export default function CreateCases() {
@@ -26,6 +28,8 @@ export default function CreateCases() {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(createCaseSchema),
@@ -37,12 +41,17 @@ export default function CreateCases() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
       api.post("/cases", values);
-      console.log(values);
       reset();
     } catch (err) {
       console.log("Erro ao cadastrar caso", err);
     }
   };
+
+  const valueCurrency = watch("value");
+
+  useEffect(() => {
+    setValue("value", currencyMask(valueCurrency));
+  }, [valueCurrency]);
 
   return (
     <Flex as="section" minHeight="100vh" align="center" justify="center">

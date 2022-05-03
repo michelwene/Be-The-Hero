@@ -17,10 +17,12 @@ import { Logo } from "../../components/Logo";
 import { Button } from "../../components/Button";
 import { useEffect } from "react";
 import { normalizePhoneNumber } from "../../utils/masks";
+import { api } from "../../services/api";
 
 type createUserFormData = {
   name: string;
   email: string;
+  password: string;
   phone: number;
   city: string;
   uf: string;
@@ -33,13 +35,25 @@ const CreateUserFormSchema = yup.object({
     .email("Insira um e-mail válido")
     .typeError("Insira um e-mail válido")
     .required("O e-mail é obrigatório"),
+  password: yup
+    .string()
+    .required("A senha é obrigatória")
+    .min(6, "A senha deve ter no mínimo 6 caracteres")
+    .max(20, "A senha deve ter no máximo 20 caracteres"),
   phone: yup
     .string()
-    .required("O whatsapp é obrigatório")
+    .required("Número obrigatório")
     .min(10, "Insira um número válido"),
-  city: yup.string().required("A cidade é obrigatória"),
+  city: yup
+    .string()
+    .required("A cidade é obrigatória")
+    .matches(/^[A-Za-z]*$/, "Insira uma cidade válida"),
   uf: yup
     .string()
+    .matches(
+      /^(\s*(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)?)$/,
+      "Insira um estado válido"
+    )
     .required("O estado é obrigatório")
     .length(2, "Digite o estado com 2 letras"),
 });
@@ -59,11 +73,10 @@ export default function CreateUser() {
     values
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    api.post("/users", values);
   };
 
   const phoneValue = watch("phone");
-
   useEffect(() => {
     setValue("phone", normalizePhoneNumber(phoneValue));
   }, [phoneValue]);
@@ -138,6 +151,12 @@ export default function CreateUser() {
                   error={errors.email}
                 />
                 <Input
+                  type="password"
+                  placeholder="Digite sua senha"
+                  {...register("password")}
+                  error={errors.password}
+                />
+                <Input
                   type="tel"
                   placeholder="Whatsapp"
                   {...register("phone")}
@@ -156,6 +175,7 @@ export default function CreateUser() {
                     }}
                     {...register("uf")}
                     error={errors.uf}
+                    textAlign="center"
                   />
                 </Flex>
               </SimpleGrid>
