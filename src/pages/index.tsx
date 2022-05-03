@@ -1,12 +1,21 @@
-import { Box, Flex, Heading, Image, Spacer, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  SimpleGrid,
+  Spacer,
+  VStack,
+} from "@chakra-ui/react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { Button } from "../components/Button";
 import { Logo } from "../components/Logo";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../components/Form/input";
+import { api } from "../services/api";
 
 interface FormUserLogin {
   email: string;
@@ -34,6 +43,18 @@ export default function Home() {
   } = useForm({
     resolver: yupResolver(CreateUserFormSchema),
   });
+
+  const handleSubmitForm: SubmitHandler<Partial<FormUserLogin>> = async (
+    data
+  ) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await api.post("/login", data);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <Flex
@@ -51,35 +72,41 @@ export default function Home() {
             <Heading as="h1" size="lg" fontWeight={500} fontSize="36px">
               Faça seu logon
             </Heading>
-            <Input
-              type="email"
-              bg="white"
-              focusBorderColor="red.500"
-              maxWidth="351px"
-              placeholder="Digite seu e-mail"
-              size="lg"
-              {...register("email")}
-              error={errors.email}
-            />
-            <Input
-              type="password"
-              bg="white"
-              focusBorderColor="red.500"
-              maxWidth="351px"
-              placeholder="Digte sua senha"
-              size="lg"
-              {...register("password")}
-              error={errors.password}
-            />
-            <Button
-              colorScheme="red"
-              width="100%"
-              size="lg"
-              loadingText="Entrando"
-              maxWidth="351px"
-            >
-              Entrar
-            </Button>
+            <Box as="form" onSubmit={handleSubmit(handleSubmitForm)}>
+              <VStack>
+                <SimpleGrid>
+                  <Input
+                    type="email"
+                    bg="white"
+                    focusBorderColor="red.500"
+                    placeholder="Digite seu e-mail"
+                    size="lg"
+                    {...register("email")}
+                    error={errors.email}
+                  />
+                  <Input
+                    type="password"
+                    bg="white"
+                    focusBorderColor="red.500"
+                    placeholder="Digte sua senha"
+                    size="lg"
+                    {...register("password")}
+                    error={errors.password}
+                  />
+                  <Button
+                    type="submit"
+                    colorScheme="red"
+                    width="100%"
+                    size="lg"
+                    loadingText="Entrando"
+                    maxWidth="351px"
+                    isLoading={isSubmitting}
+                  >
+                    Entrar
+                  </Button>
+                </SimpleGrid>
+              </VStack>
+            </Box>
             <Link href="/createUser" passHref>
               <Button
                 leftIcon={<MdOutlineExitToApp color="red" />}

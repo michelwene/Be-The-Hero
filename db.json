@@ -22,6 +22,11 @@
       "city": "Quatá",
       "uf": "MG",
       "id": 1
+    },
+    {
+      "email": "michelwene@hotmail.com",
+      "password": "$2a$10$mEyQ/bynWPcrUlhFo9k41u5UaiK7cuv7ZPeYQBGa5BS5aqop1Mbh6",
+      "id": 2
     }
   ]
 }

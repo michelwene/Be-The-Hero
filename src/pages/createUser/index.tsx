@@ -73,7 +73,11 @@ export default function CreateUser() {
     values
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    api.post("/users", values);
+    try {
+      api.post("/users", values);
+    } catch (err) {
+      console.log("erro: ", err);
+    }
   };
 
   const phoneValue = watch("phone");

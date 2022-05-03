@@ -133,6 +133,7 @@ export default function CreateCases() {
               colorScheme="red"
               flex="2"
               height="60px"
+              loadingText="Cadastrando..."
               isLoading={isSubmitting}
             >
               Cadastrar
