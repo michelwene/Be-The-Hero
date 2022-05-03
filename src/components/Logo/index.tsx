@@ -1,7 +1,7 @@
 import { Image } from "@chakra-ui/react";
 
 interface LogoProps {
-  width?: string;
+  width?: string[];
   height?: string;
 }
 

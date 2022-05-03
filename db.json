@@ -1,12 +1,5 @@
 {
-  "cases": [
-    {
-      "title": "Cadelinha atropelada",
-      "description": "Cadelinha atropela na avenida teste",
-      "value": "578.98",
-      "id": 1
-    }
-  ],
+  "cases": [],
   "users": [
     {
       "email": "Teste@gmail.com",

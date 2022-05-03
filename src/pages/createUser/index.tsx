@@ -97,15 +97,18 @@ export default function CreateUser() {
       >
         <Flex
           minHeight="577px"
-          boxShadow="2xl"
+          boxShadow={["none", "2xl"]}
           borderRadius="8px"
           align="center"
           justifyContent="center"
+          flexDirection={["column", "column", "row"]}
           columnGap="96px"
-          px="96px"
+          rowGap={["50px", "40px", "0"]}
+          px={["10px", "96px"]}
+          py={["20px", "0"]}
         >
           <VStack align="flex-start" maxWidth="384px">
-            <Logo width="191px" height="81px" />
+            <Logo width={["191px"]} height="81px" />
             <Box pt="64px" pb="84">
               <Heading
                 as="h1"

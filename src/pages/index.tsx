@@ -57,77 +57,82 @@ export default function Home() {
     }
   }
   return (
-    <>
-      <Flex
-        as="section"
-        minWidth="max-content"
-        mx="auto"
-        height="100vh"
-        align="center"
-        justify="center"
-        gap="150px"
-      >
-        <Box>
-          <Logo />
-          <VStack spacing={5} mt="110px" alignItems="flex-start" width="351px">
-            <Heading as="h1" size="lg" fontWeight={500} fontSize="36px">
-              Faça seu logon
-            </Heading>
-            <Box
-              as="form"
-              width="100%"
-              onSubmit={handleSubmit(handleSubmitForm)}
+    <Flex
+      as="section"
+      minWidth={["100vw", "max-content"]}
+      mx={["auto", "0"]}
+      my={["20px", "0"]}
+      height="100vh"
+      flexDirection={["column", "column", "column", "column", "row"]}
+      align="center"
+      justify="center"
+      gap={["50px", "70px", "80px", "90px"]}
+    >
+      <Box>
+        <Logo width={["50%", "100%"]} />
+        <VStack
+          spacing={5}
+          mt={["50px", "70px", "110px"]}
+          alignItems="flex-start"
+          width={["88vw", "351px"]}
+        >
+          <Heading as="h1" size="lg" fontWeight={500} fontSize="36px">
+            Faça seu logon
+          </Heading>
+          <Box
+            as="form"
+            width={["88vw", "100%"]}
+            onSubmit={handleSubmit(handleSubmitForm)}
+          >
+            <VStack alignItems="flex-start">
+              <SimpleGrid width="100%" spacing={4}>
+                <Input
+                  type="email"
+                  bg="white"
+                  focusBorderColor="red.500"
+                  placeholder="Digite seu e-mail"
+                  size="lg"
+                  {...register("email")}
+                  error={errors.email}
+                />
+                <Input
+                  type="password"
+                  bg="white"
+                  focusBorderColor="red.500"
+                  placeholder="Digte sua senha"
+                  size="lg"
+                  {...register("password")}
+                  error={errors.password}
+                />
+                <Button
+                  type="submit"
+                  colorScheme="red"
+                  width="100%"
+                  size="lg"
+                  loadingText="Entrando"
+                  maxWidth={["none", "351px"]}
+                  isLoading={isSubmitting}
+                >
+                  Entrar
+                </Button>
+              </SimpleGrid>
+            </VStack>
+          </Box>
+          <Link href="/createUser" passHref>
+            <Button
+              leftIcon={<MdOutlineExitToApp color="red" />}
+              variant="link"
+              colorScheme="gray.1000"
+              alignSelf="flex-start"
             >
-              <VStack alignItems="flex-start">
-                <SimpleGrid width="100%" spacing={4}>
-                  <Input
-                    type="email"
-                    bg="white"
-                    focusBorderColor="red.500"
-                    placeholder="Digite seu e-mail"
-                    size="lg"
-                    {...register("email")}
-                    error={errors.email}
-                  />
-                  <Input
-                    type="password"
-                    bg="white"
-                    focusBorderColor="red.500"
-                    placeholder="Digte sua senha"
-                    size="lg"
-                    {...register("password")}
-                    error={errors.password}
-                  />
-                  <Button
-                    type="submit"
-                    colorScheme="red"
-                    width="100%"
-                    size="lg"
-                    loadingText="Entrando"
-                    maxWidth="351px"
-                    isLoading={isSubmitting}
-                  >
-                    Entrar
-                  </Button>
-                </SimpleGrid>
-              </VStack>
-            </Box>
-            <Link href="/createUser" passHref>
-              <Button
-                leftIcon={<MdOutlineExitToApp color="red" />}
-                variant="link"
-                colorScheme="gray.1000"
-                alignSelf="flex-start"
-              >
-                Não tenho cadastro
-              </Button>
-            </Link>
-          </VStack>
-        </Box>
-        <Box>
-          <Image src="/Pessoas.svg" objectFit="cover" alt="pessoas" />
-        </Box>
-      </Flex>
-    </>
+              Não tenho cadastro
+            </Button>
+          </Link>
+        </VStack>
+      </Box>
+      <Box>
+        <Image src="/Pessoas.svg" objectFit="cover" alt="pessoas" />
+      </Box>
+    </Flex>
   );
 }

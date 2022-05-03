@@ -57,14 +57,15 @@ export default function CreateCases() {
     <Flex as="section" minHeight="100vh" align="center" justify="center">
       <Flex
         borderRadius="8px"
-        boxShadow="2xl"
+        boxShadow={["0", "2xl"]}
         columnGap="148px"
         justifyContent="space-between"
+        flexDirection={["column", "column", "column", "row"]}
         minHeight="577px"
         mx="auto"
         my="auto"
-        px="96px"
-        width="78vw"
+        px={["0", "96px"]}
+        width={["90vw", "78vw"]}
       >
         <Flex
           flexDirection="column"
@@ -72,7 +73,7 @@ export default function CreateCases() {
           maxWidth="332px"
           py="94px"
         >
-          <Logo width="191px" height="80px" />
+          <Logo width={["191px"]} height="80px" />
           <Heading as="h1" mt="64px" mb="32px">
             Cadastrar novo caso
           </Heading>
@@ -85,7 +86,7 @@ export default function CreateCases() {
             <Button
               alignSelf="flex-start"
               color="gray.1000"
-              mt="84px"
+              mt={["10px", "15px", "20px", "25px", "50px"]}
               leftIcon={<BiLeftArrowAlt color="red" fontSize="1.5rem" />}
               variant="link"
             >
@@ -107,12 +108,11 @@ export default function CreateCases() {
             {...register("title")}
             error={errors.title}
           />
-          <Input
+          <Textarea
             placeholder="Descrição"
-            height="175px"
+            height="176px"
             bg="white"
             {...register("description")}
-            error={errors.description}
           />
 
           <Input

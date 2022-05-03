@@ -50,18 +50,20 @@ export default function Cases() {
   }
 
   return (
-    <Box as="section" maxWidth="78vw" mx="auto">
+    <Box as="section" maxWidth="78vw" mx="auto" my={["20px", "0"]}>
       <Heading
         as="header"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        mt="24px"
+        rowGap={["20px", "0px"]}
+        flexDirection={["column", "row"]}
+        mt={["0", "24px"]}
       >
         <Flex columnGap="48px" align="center">
-          <Logo width="164px" height="63px" />
+          <Logo width={["164px"]} height="63px" />
           <Text fontSize="md" fontWeight={400} lineHeight="18px">
-            Bem vindo(a), {userData?.user.name}
+            Bem vindo(a), <strong>{userData?.user.name}</strong>
           </Text>
         </Flex>
         <Flex columnGap="24px">
@@ -91,7 +93,13 @@ export default function Cases() {
         mx="auto"
         gap="32px"
         wrap="wrap"
-        justifyContent="space-between"
+        justifyContent={[
+          "center",
+          "center",
+          "center",
+          "center",
+          "space-between",
+        ]}
         maxWidth="1120px"
       >
         {cases.map((data) => (
@@ -99,7 +107,7 @@ export default function Cases() {
             <Flex
               flexDirection="column"
               bg="white"
-              width="543px"
+              width={["543px"]}
               maxWidth="543px"
               padding="32px"
               borderRadius="8px"
@@ -150,10 +158,7 @@ export default function Cases() {
                   Valor:
                 </Heading>
                 <Text fontSize="md" fontWeight={400} color="gray.500">
-                  {new Intl.NumberFormat("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  }).format(Number(data.value))}
+                  R$ {data.value}
                 </Text>
               </Box>
             </Flex>
