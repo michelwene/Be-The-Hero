@@ -15,9 +15,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { Logo } from "../../components/Logo";
 import { Button } from "../../components/Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { normalizePhoneNumber } from "../../utils/masks";
 import { api } from "../../services/client/api";
+import Router from "next/router";
 
 type createUserFormData = {
   name: string;
@@ -47,7 +48,7 @@ const CreateUserFormSchema = yup.object({
   city: yup
     .string()
     .required("A cidade é obrigatória")
-    .matches(/^[A-Za-z]*$/, "Insira uma cidade válida"),
+    .matches(/^[A-Za-z ]*$/, "Insira uma cidade válida"),
   uf: yup
     .string()
     .matches(
@@ -64,6 +65,7 @@ export default function CreateUser() {
     handleSubmit,
     watch,
     setValue,
+    setError,
     reset,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -75,10 +77,16 @@ export default function CreateUser() {
   ) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     try {
-      api.post("/users", values);
+      await api.post("/users", values);
       reset();
+      Router.push("/");
     } catch (err) {
-      console.log("erro: ", err);
+      if (err) {
+        setError("email", {
+          type: "value",
+          message: "E-mail já cadastrado",
+        });
+      }
     }
   };
 
@@ -105,7 +113,7 @@ export default function CreateUser() {
           columnGap="96px"
           rowGap={["50px", "40px", "0"]}
           px={["10px", "96px"]}
-          py={["20px", "0"]}
+          py={["20px", "20px", "0"]}
         >
           <VStack align="flex-start" maxWidth="384px">
             <Logo width={["191px"]} height="81px" />

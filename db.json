@@ -1,32 +1,51 @@
 {
-  "cases": [],
-  "users": [
+  "cases": [
     {
-      "email": "Teste@gmail.com",
-      "password": "$2a$10$JxHJ9GjTcX9kLz5tS.jD/ey9nCzsTlzvTHVKl0Wx2ivTSKlo96DzS",
-      "name": "Teste",
-      "phone": "(18) 99999-9999",
-      "city": "Quatá",
-      "uf": "MG",
+      "title": "Lorem ipsum accumsan. ",
+      "description": "Lorem ipsum laoreet conubia rutrum laoreet rutrum enim hendrerit, erat habitasse nam vel porttitor neque conubia diam, curabitur cubilia posuere quisque ultrices conubia porta. hendrerit vel iaculis felis pellentesque consequat praesent sem accumsan tempus quisque semper tristique, aptent aenean hac arcu scelerisque tempus vel molestie primis vel dictum nunc, himenaeos nisi libero varius aliquam lectus non inceptos fames duis pellentesque. inceptos sagittis feugiat aenean mattis sociosqu tellus id, dictumst ligula faucibus ultrices velit vulputate nunc, consequat aptent lorem euismod quisque aenean. porta dapibus faucibus senectus nostra cubilia suscipit suspendisse vel ullamcorper ut, lectus phasellus euismod potenti posuere volutpat luctus venenatis. ",
+      "value": "159.38",
       "id": 1
     },
     {
-      "email": "wene@email.com",
-      "password": "$2a$10$qsL1RQYr1GTg/zIzbzDQaOcwc5z1lj6.rcLQNShx99i2VhWMLR82G",
-      "name": "Teste2",
-      "phone": "(18) 99807-1096",
-      "city": "Brasil",
-      "uf": "SP",
-      "id": 3
+      "title": "Lorem.",
+      "description": "Lorem ipsum velit rhoncus posuere diam vehicula lobortis dui, sit dolor eros quisque imperdiet dui habitasse molestie, convallis massa ipsum a ante faucibus facilisis. interdum inceptos mollis ac pellentesque ut curabitur egestas sed scelerisque sed, pellentesque cras pretium inceptos nostra sagittis class tempor ligula mi, cursus fermentum lectus semper lacus tortor justo aliquet laoreet. nibh mollis non habitant hendrerit donec imperdiet ultricies egestas hac, volutpat at aliquam gravida aenean dapibus nisl. eget mattis amet quam turpis blandit torquent faucibus ornare sociosqu quam, litora dapibus pharetra id volutpat luctus malesuada quisque nulla, varius purus cras ultrices elit at adipiscing ligula pharetra. ",
+      "value": "998.75",
+      "id": 2
     },
     {
-      "email": "Unidos@gmail.com",
-      "password": "$2a$10$sI5itKfi4wqcqdt1pdvs3.tpWNqh5.XM7bdJ6ysMqz9agaSlsl28a",
-      "name": "Unidos",
-      "phone": "(18) 25555-5555",
-      "city": "Quata",
+      "title": "ultrices elit at adipiscing ligula pharetra.",
+      "description": "Lorem ipsum velit rhoncus posuere diam vehicula lobortis dui, sit dolor eros quisque imperdiet dui habitasse molestie, convallis massa ipsum a ante faucibus facilisis. interdum inceptos mollis ac pellentesque ut curabitur egestas sed scelerisque sed, pellentesque cras pretium inceptos nostra sagittis class tempor ligula mi, cursus fermentum lectus semper lacus tortor justo aliquet laoreet. nibh mollis non habitant hendrerit donec imperdiet ultricies egestas hac, volutpat at aliquam gravida aenean dapibus nisl. eget mattis amet quam turpis blandit torquent faucibus ornare sociosqu quam, litora dapibus pharetra id volutpat luctus malesuada quisque nulla, varius purus cras ultrices elit at adipiscing ligula pharetra.",
+      "value": "654.44",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "email": "email@email.com",
+      "password": "$2a$10$/I6r4LXoVYMJZP7cwaICT.Xp7.oLGjfoH4BFKsoTXbXcWBLdMJ3Cq",
+      "name": "ong",
+      "phone": "(18) 99999-9999",
+      "city": "Sao Paulo",
       "uf": "SP",
-      "id": 4
+      "id": 1
+    },
+    {
+      "email": "ong@teste.com",
+      "password": "$2a$10$lXaDjN4iQi0I/P8CON6Tw.3t.ZopekhtWCmYpr3p7/m84J15eOAsy",
+      "name": "ong teste1",
+      "phone": "(18) 99999-9999",
+      "city": "SAO PAULO",
+      "uf": "SP",
+      "id": 2
+    },
+    {
+      "email": "teste@email.com",
+      "password": "$2a$10$qNMKFTOTto/lOTjXgv3SC.lK0UO.mNo/IL4VqQmt4nSGz.y48TDJy",
+      "name": "teste3",
+      "phone": "(18) 99999-9999",
+      "city": "SAO PAULO",
+      "uf": "SP",
+      "id": 3
     }
   ]
 }

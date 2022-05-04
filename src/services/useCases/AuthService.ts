@@ -23,6 +23,8 @@ class AuthService {
 
       if (error.isAxiosError) {
         switch (error.response?.status) {
+          case 400:
+            throw new Error("Usuário ou senha inválidos");
           case 401:
             throw new Error("Email e/ou senha incorretos.");
           case 500:

@@ -13,11 +13,12 @@ import Link from "next/link";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { Button } from "../components/Button";
 import { Logo } from "../components/Logo";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input } from "../components/Form/input";
-import { api } from "../services/client/api";
 import Router from "next/router";
 import { authService } from "../services/useCases/AuthService";
+import { useState } from "react";
+import { InputError } from "../components/InputError";
 
 interface FormUserLogin {
   email?: string;
@@ -28,7 +29,6 @@ const CreateUserFormSchema = yup.object({
   email: yup
     .string()
     .email("Insira um e-mail válido")
-    .typeError("Insira um e-mail válido")
     .required("O e-mail é obrigatório"),
   password: yup
     .string()
@@ -38,6 +38,8 @@ const CreateUserFormSchema = yup.object({
 });
 
 export default function Home() {
+  const [errorRequest, setErrorRequest] = useState<null | string>(null);
+
   const {
     register,
     handleSubmit,
@@ -53,7 +55,11 @@ export default function Home() {
 
       Router.push("/cases");
     } catch (err) {
-      console.log(err);
+      setErrorRequest(err.message);
+      setTimeout(() => {
+        setErrorRequest(null);
+      }, 3000);
+    } finally {
     }
   }
   return (
@@ -62,7 +68,9 @@ export default function Home() {
       minWidth={["100vw", "max-content"]}
       mx={["auto", "0"]}
       my={["20px", "0"]}
-      height="100vh"
+      minHeight="100vh"
+      height="100%"
+      overflow={["scroll"]}
       flexDirection={["column", "column", "column", "column", "row"]}
       align="center"
       justify="center"
@@ -95,6 +103,7 @@ export default function Home() {
                   {...register("email")}
                   error={errors.email}
                 />
+
                 <Input
                   type="password"
                   bg="white"
@@ -104,6 +113,9 @@ export default function Home() {
                   {...register("password")}
                   error={errors.password}
                 />
+                {errorRequest && (
+                  <InputError>E-mail e/ou senha incorretos</InputError>
+                )}
                 <Button
                   type="submit"
                   colorScheme="red"
@@ -130,9 +142,7 @@ export default function Home() {
           </Link>
         </VStack>
       </Box>
-      <Box>
-        <Image src="/Pessoas.svg" objectFit="cover" alt="pessoas" />
-      </Box>
+      <Image src="/Pessoas.svg" objectFit="cover" alt="pessoas" height="50%" />
     </Flex>
   );
 }
