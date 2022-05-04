@@ -2,12 +2,13 @@ import { GetServerSidePropsContext } from "next";
 
 import axios from "axios";
 import { parseCookies } from "nookies";
+import url from "../../config/index";
 
 export function setupAPI(ctx?: GetServerSidePropsContext) {
   const { "@auth:accessToken": accessToken } = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: "http://localhost:3333/",
+    baseURL: `${url.URL_BACKEND}/`,
   });
 
   if (accessToken)

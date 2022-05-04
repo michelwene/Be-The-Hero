@@ -51,6 +51,7 @@ export default function CreateCases() {
 
   useEffect(() => {
     setValue("value", currencyMask(valueCurrency));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueCurrency]);
 
   return (
