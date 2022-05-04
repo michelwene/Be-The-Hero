@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import NextLink from "next/link";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Logo } from "../../components/Logo";

@@ -6,7 +6,7 @@ import { handleSaveDataInCookie } from "../../utils/saveDataInCookie";
 class AuthService {
   async signIn(payload: IPayloadSignIn): Promise<void> {
     try {
-      const { data, headers } = await api.post<IUserData>("/signin", payload);
+      const { data } = await api.post<IUserData>("/signin", payload);
 
       setAuthentication(data.accessToken);
 

@@ -43,6 +43,7 @@ export default function Home() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(CreateUserFormSchema),
@@ -55,11 +56,26 @@ export default function Home() {
 
       Router.push("/cases");
     } catch (err) {
-      setErrorRequest(err.message);
-      setTimeout(() => {
-        setErrorRequest(null);
-      }, 3000);
-    } finally {
+      if (err) {
+        setError("email", {
+          type: "value",
+          message: "E-mail ou senha incorretos",
+        });
+        setError("password", {
+          type: "value",
+          message: "E-mail ou senha incorretos",
+        });
+        setTimeout(() => {
+          setError("email", {
+            type: "value",
+            message: "",
+          });
+          setError("password", {
+            type: "value",
+            message: "",
+          });
+        }, 2000);
+      }
     }
   }
   return (

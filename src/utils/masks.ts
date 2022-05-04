@@ -1,5 +1,3 @@
-import React from "react";
-
 export const normalizePhoneNumber = (value: string | undefined) => {
   if (!value) return "";
 
