@@ -93,6 +93,7 @@ export default function CreateUser() {
   const phoneValue = watch("phone");
   useEffect(() => {
     setValue("phone", normalizePhoneNumber(phoneValue));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneValue]);
 
   return (
