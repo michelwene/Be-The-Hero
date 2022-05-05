@@ -5,6 +5,10 @@ Esta é uma solução para o projeto Be-The-Hero.
 - Usuário e senha para logar na aplicação.
 - teste@email.com
 - 123456
+- para testar o projeto é necessario clonar este repositório, instalar as dependências e rodar os seguintes comandos no terminal.
+- yarn (para instalar as dependências).
+- yarn server (para iniciar o servidor do json server).
+- yarn dev (para rodar a aplicação).
 
 - Porém se quiser poderá realizar o cadastro na aplicação.
 
