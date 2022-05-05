@@ -57,10 +57,14 @@ Os usuários devem ser capazes de:
 <img src="/public/mobile.png"alt="mobile"/>
 </p>
 
+- Aplicação
+<p  align="center" >
+<img src="/public/aplicacao.gif"alt="Aplicacao"/>
+</p>
+
 ### Links
 
 - Solução URL: [https://github.com/michelwene/Be-The-Hero](https://github.com/michelwene/Be-The-Hero)
-- Site URL: [https://be-the-hero-michelwene.vercel.app/](https://be-the-hero-michelwene.vercel.app/)
 
 ## :page_with_curl: Meu processo
 
